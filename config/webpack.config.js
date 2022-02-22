@@ -2,6 +2,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const ESLintPlugin = require('eslint-webpack-plugin')
+// 本插件会将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 
 /** @type {import('webpack').Configuration} */
@@ -44,7 +46,19 @@ module.exports = {
       },
       {
         test: /\.(css|scss|sass)$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: [
+          /**
+           * 生产环境将 css 提取出来
+           * 不要同时使用 style-loader 与 mini-css-extract-plugin
+           * https://webpack.docschina.org/plugins/mini-css-extract-plugin/#recommend
+           */
+          process.env.NODE_ENV !== 'production'
+            ? 'style-loader'
+            : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ],
         generator: {
           filename: 'style/[hash][ext]'
         }
