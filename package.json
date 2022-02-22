@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.config.dev.js --progress",
-    "dev": "cross-env NODE_ENV=development webpack --config ./config/webpack.config.dev.js --progress",
-    "prod": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.prod.js --progress",
+    "serve": "cross-env NODE_ENV=development webpack serve --config ./build/webpack.config.dev.js --progress",
+    "dev": "cross-env NODE_ENV=development webpack --config ./build/webpack.config.dev.js --progress",
+    "prod": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.prod.js --progress",
     "lint": "eslint src/**/*.* --fix"
   },
   "keywords": [],

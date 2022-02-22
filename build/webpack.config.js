@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, '..', 'dist'),
-    filename: 'scripts/[name].[contenthash].js',
+    filename: 'js/[name].[contenthash].js',
     // 清理之前的文件
     clean: true
   },
@@ -60,21 +60,21 @@ module.exports = {
           'sass-loader'
         ],
         generator: {
-          filename: 'style/[hash][ext]'
+          filename: 'css/[hash][ext]'
         }
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[hash][ext]'
+          filename: 'img/[hash][ext]'
         }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[hash][ext]'
+          filename: 'font/[hash][ext]'
         }
       }
     ]
@@ -88,6 +88,7 @@ module.exports = {
     new VueLoaderPlugin(),
     // 生成 html 模板
     new HtmlWebpackPlugin({
+      title: 'webpack5 + vue3 + ts',
       favicon: 'public/favicon.ico',
       // 模板
       template: 'public/index.html',

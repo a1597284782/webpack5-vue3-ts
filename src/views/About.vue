@@ -1,5 +1,8 @@
 <template>
   <h3>About</h3>
+  <p class="p">
+    开始讲课
+  </p>
 </template>
 
 <script lang="ts">
@@ -12,5 +15,8 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.p {
+  background-color: aqua;
+}
 </style>
