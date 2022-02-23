@@ -8,7 +8,7 @@ module.exports = () => {
     mode: 'development',
 
     // 使用 source map 仅用于开发环境
-    devtool: 'inline-source-map',
+    devtool: 'eval-cheap-module-source-map',
 
     devServer: {
       static: {

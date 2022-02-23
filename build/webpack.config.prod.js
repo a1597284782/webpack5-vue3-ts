@@ -19,10 +19,9 @@ module.exports = () => {
         filename: 'css/[contenthash].css'
       })
     ],
-    
+
     // 优化
     optimization: {
-      runtimeChunk: 'single',
       minimizer: [
         new CssMinimizerPlugin(),
         new TerserPlugin({
@@ -36,13 +35,27 @@ module.exports = () => {
           }
         })
       ],
-      // 将第三方库(library)（例如 lodash 或 react）提取到单独的 vendor chunk 文件中
+      moduleIds: 'deterministic',
+      // 将第三方库(library)（例如 lodash 或 react）提取到单独的 chunk 文件中
       splitChunks: {
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
             chunks: 'all'
+            // 会将所有常见模块和 vendor 合并为一个 chunk
+            // name: 'vendors',
+
+            // 这个函数会根据包名生成对应的 js 文件
+            // name(module) {
+            //   // get the name. E.g. node_modules/packageName/not/this/part.js
+            //   // or node_modules/packageName
+            //   const packageName = module.context.match(
+            //     /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            //   )[1]
+
+            //   // npm package names are URL-safe, but some servers don't like @ symbols
+            //   return `npm.${packageName.replace('@', '')}`
+            // },
           }
         }
       }
