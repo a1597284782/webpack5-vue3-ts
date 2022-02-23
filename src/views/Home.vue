@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>Counter</h3>
+    <p>日期：{{ time }}</p>
     <p>{{ env }}</p>
     <div class="count">
       {{ count }}
@@ -18,6 +19,8 @@
 import { computed, defineComponent, reactive, ref } from 'vue'
 // import { useStore } from 'vuex'
 import store from '@/store'
+import dayjs from 'dayjs'
+import _ from 'lodash'
 
 export default defineComponent({
   setup() {
@@ -33,11 +36,17 @@ export default defineComponent({
       store.commit('min')
     }
 
+    const time = dayjs().format('YYYY-MM-DD')
+
+    _.cloneDeep(time)
+
+
     return reactive({
       count: computed(() => store.state.count),
       add,
       min,
-      env
+      env,
+      time
     })
   }
 })
